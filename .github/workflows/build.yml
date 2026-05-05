@@ -31,3 +31,5 @@ jobs:
           dotnet test ShareBridge.Tests/ShareBridge.Tests.csproj
           --configuration Release
           --no-restore
+          -p:Platform=x64
+          -p:GenerateAppxPackageOnBuild=false

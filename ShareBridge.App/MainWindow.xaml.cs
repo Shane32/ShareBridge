@@ -1,6 +1,6 @@
-using Microsoft.UI.Xaml;
 using System.Diagnostics;
 using System.Reflection;
+using Microsoft.UI.Xaml;
 using ShareBridge.App.Models;
 using ShareBridge.App.Services;
 
@@ -22,7 +22,7 @@ public sealed partial class MainWindow : Window
         this.InitializeComponent();
 
         Title = "Share Bridge";
-        this.AppWindow.Resize(new Windows.Graphics.SizeInt32(520, 400));
+        AppWindow.Resize(new Windows.Graphics.SizeInt32(520, 400));
 
         PopulateStatus();
     }

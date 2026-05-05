@@ -288,6 +288,9 @@ dotnet_diagnostic.IDE0005.severity = suggestion
 # IDE0058: Remove unnecessary expression value
 dotnet_diagnostic.IDE0058.severity = none
 
+# IDE0060: Remove unused parameter (not an error; event handlers require matching delegate signatures)
+dotnet_diagnostic.IDE0060.severity = silent
+
 # IDE0008: Use explicit type
 dotnet_diagnostic.IDE0008.severity = none
 

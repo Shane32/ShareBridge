@@ -1,5 +1,5 @@
-using Microsoft.UI.Xaml;
 using System.Diagnostics;
+using Microsoft.UI.Xaml;
 
 namespace ShareBridge.App;
 
@@ -18,7 +18,7 @@ public sealed partial class ErrorWindow : Window
         this.InitializeComponent();
 
         Title = "Share Bridge – Error";
-        this.AppWindow.Resize(new Windows.Graphics.SizeInt32(480, 280));
+        AppWindow.Resize(new Windows.Graphics.SizeInt32(480, 280));
 
         ErrorMessageText.Text = errorMessage;
     }
@@ -36,5 +36,5 @@ public sealed partial class ErrorWindow : Window
     }
 
     private void CloseButton_Click(object sender, RoutedEventArgs e) =>
-        this.Close();
+        Close();
 }

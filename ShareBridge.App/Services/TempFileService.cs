@@ -171,7 +171,7 @@ public sealed class TempFileService
         return Path.Combine(folder, $"{nameWithoutExt}_{Guid.NewGuid():N}{ext}");
     }
 
-    internal static string SanitizeFileName(string name)
+    public static string SanitizeFileName(string name)
     {
         if (string.IsNullOrWhiteSpace(name))
             return $"file_{Guid.NewGuid():N}";

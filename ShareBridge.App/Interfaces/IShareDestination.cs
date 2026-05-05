@@ -11,13 +11,13 @@ namespace ShareBridge.App.Interfaces;
 public interface IShareDestination
 {
     /// <summary>Gets the stable identifier for this destination (e.g. "outlook-classic").</summary>
-    string Id { get; }
+    public string Id { get; }
 
     /// <summary>Gets the human-readable display name shown in the UI.</summary>
-    string DisplayName { get; }
+    public string DisplayName { get; }
 
     /// <summary>Returns true when this destination is capable of handling the given payload.</summary>
-    bool CanHandle(SharedPayload payload);
+    public bool CanHandle(SharedPayload payload);
 
     /// <summary>
     /// Dispatches the payload to the destination.
@@ -25,5 +25,5 @@ public interface IShareDestination
     /// and presenting the content to the user. It must never send anything
     /// automatically.
     /// </summary>
-    Task DispatchAsync(SharedPayload payload, CancellationToken cancellationToken);
+    public Task DispatchAsync(SharedPayload payload, CancellationToken cancellationToken);
 }

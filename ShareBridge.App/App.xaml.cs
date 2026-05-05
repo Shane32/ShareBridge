@@ -1,9 +1,9 @@
+using System.Text.Json;
 using Microsoft.UI.Xaml;
 using Microsoft.Windows.AppLifecycle;
-using System.Text.Json;
 using ShareBridge.App.Models;
 using ShareBridge.App.Services;
-using WinActivation = Windows.ApplicationModel.Activation;
+using Windows.ApplicationModel.Activation;
 
 namespace ShareBridge.App;
 
@@ -26,7 +26,7 @@ public partial class App : Application
         _settings = LoadSettings();
     }
 
-    protected override void OnLaunched(LaunchActivatedEventArgs args)
+    protected override void OnLaunched(Microsoft.UI.Xaml.LaunchActivatedEventArgs args)
     {
         var activationArgs = AppInstance.GetCurrent().GetActivatedEventArgs();
 
@@ -42,8 +42,7 @@ public partial class App : Application
 
     private void HandleShareTargetActivation(AppActivationArguments activationArgs)
     {
-        var shareArgs = activationArgs.Data as WinActivation.IShareTargetActivatedEventArgs;
-        if (shareArgs == null) {
+        if (activationArgs.Data is not IShareTargetActivatedEventArgs shareArgs) {
             _logger.LogError("init", "Share activation args could not be cast to IShareTargetActivatedEventArgs");
             ShowMainWindow();
             return;

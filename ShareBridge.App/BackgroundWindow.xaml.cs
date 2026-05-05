@@ -13,7 +13,7 @@ public sealed partial class BackgroundWindow : Window
         this.InitializeComponent();
 
         // Minimise the window so it doesn't appear in the taskbar / foreground
-        this.AppWindow.Resize(new Windows.Graphics.SizeInt32(1, 1));
-        this.AppWindow.Hide();
+        AppWindow.Resize(new Windows.Graphics.SizeInt32(1, 1));
+        AppWindow.Hide();
     }
 }
