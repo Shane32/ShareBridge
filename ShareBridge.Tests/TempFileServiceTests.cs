@@ -90,7 +90,7 @@ public sealed class TempFileServiceTests : IDisposable
     // SaveStreamAsync
 
     [Fact]
-    public async Task SaveStreamAsync_WritesFileToFolder()
+    public async Task SaveStreamAsync_WritesFileToFolderAsync()
     {
         // Use a temp folder that we control instead of %LOCALAPPDATA%
         var logger = new LoggingService();
@@ -117,7 +117,7 @@ public sealed class TempFileServiceTests : IDisposable
     // WriteMetadataAsync
 
     [Fact]
-    public async Task WriteMetadataAsync_WritesValidJson()
+    public async Task WriteMetadataAsync_WritesValidJsonAsync()
     {
         var logger = new LoggingService();
         var svc = new TempFileService(logger);
@@ -125,8 +125,7 @@ public sealed class TempFileServiceTests : IDisposable
         var opFolder = Path.Combine(_testRoot, "op2");
         Directory.CreateDirectory(opFolder);
 
-        var payload = new SharedPayload
-        {
+        var payload = new SharedPayload {
             OperationId = "abc12345",
             ReceivedAt = new DateTimeOffset(2026, 5, 5, 10, 15, 30, TimeSpan.Zero),
             Files =

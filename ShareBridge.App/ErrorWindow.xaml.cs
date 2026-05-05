@@ -25,16 +25,12 @@ public sealed partial class ErrorWindow : Window
 
     private void OpenLogFolderButton_Click(object sender, RoutedEventArgs e)
     {
-        try
-        {
-            Process.Start(new ProcessStartInfo
-            {
+        try {
+            Process.Start(new ProcessStartInfo {
                 FileName = _logFolder,
                 UseShellExecute = true
             });
-        }
-        catch
-        {
+        } catch {
             // Best effort
         }
     }

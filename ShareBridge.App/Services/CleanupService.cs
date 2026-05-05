@@ -45,25 +45,20 @@ public class CleanupService
         var cutoff = DateTimeOffset.Now.AddHours(-_retentionHours);
         var deleted = 0;
 
-        foreach (var dir in Directory.EnumerateDirectories(_incomingRoot))
-        {
-            try
-            {
+        foreach (var dir in Directory.EnumerateDirectories(_incomingRoot)) {
+            try {
                 // Never delete the active operation folder
                 if (!string.IsNullOrEmpty(activeOperationFolder) &&
                     string.Equals(dir, activeOperationFolder, StringComparison.OrdinalIgnoreCase))
                     continue;
 
                 var info = new DirectoryInfo(dir);
-                if (info.CreationTime <= cutoff.LocalDateTime)
-                {
+                if (info.CreationTime <= cutoff.LocalDateTime) {
                     Directory.Delete(dir, recursive: true);
                     deleted++;
                     _logger.LogInfo("cleanup", $"Deleted old operation folder: {dir}");
                 }
-            }
-            catch (Exception ex)
-            {
+            } catch (Exception ex) {
                 _logger.LogWarning("cleanup", $"Could not delete folder: {dir}", ex);
             }
         }
