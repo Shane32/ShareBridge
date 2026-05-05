@@ -1,5 +1,5 @@
-using Microsoft.UI.Xaml;
 using System.Diagnostics;
+using Microsoft.UI.Xaml;
 
 namespace ShareBridge.App;
 

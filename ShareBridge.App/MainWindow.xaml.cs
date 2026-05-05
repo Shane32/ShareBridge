@@ -1,6 +1,6 @@
-using Microsoft.UI.Xaml;
 using System.Diagnostics;
 using System.Reflection;
+using Microsoft.UI.Xaml;
 using ShareBridge.App.Models;
 using ShareBridge.App.Services;
 

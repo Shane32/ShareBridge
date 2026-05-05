@@ -1,8 +1,8 @@
+using ShareBridge.App.Models;
 using Windows.ApplicationModel.DataTransfer;
 using Windows.ApplicationModel.DataTransfer.ShareTarget;
 using Windows.Storage;
 using Windows.Storage.Streams;
-using ShareBridge.App.Models;
 
 namespace ShareBridge.App.Services;
 

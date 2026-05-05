@@ -1,5 +1,5 @@
-using Windows.ApplicationModel.DataTransfer.ShareTarget;
 using ShareBridge.App.Models;
+using Windows.ApplicationModel.DataTransfer.ShareTarget;
 
 namespace ShareBridge.App.Services;
 
