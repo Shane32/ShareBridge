@@ -8,6 +8,7 @@
     <IsPackable>false</IsPackable>
     <RootNamespace>ShareBridge.Tests</RootNamespace>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <WarningsNotAsErrors>IDE0060</WarningsNotAsErrors>
   </PropertyGroup>
 
   <ItemGroup>
