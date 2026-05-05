@@ -1,0 +1,81 @@
+<Window
+    x:Class="ShareBridge.App.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:ShareBridge.App"
+    Title="Share Bridge">
+
+    <Grid Padding="32" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Header -->
+        <StackPanel Grid.Row="0" Spacing="4" Margin="0,0,0,24">
+            <TextBlock Text="Share Bridge is installed."
+                       Style="{ThemeResource TitleTextBlockStyle}" />
+            <TextBlock Text="Use Windows Share and select &quot;Share to Outlook Classic&quot;."
+                       Style="{ThemeResource BodyTextBlockStyle}"
+                       TextWrapping="Wrap" />
+        </StackPanel>
+
+        <!-- Status cards -->
+        <StackPanel Grid.Row="1" Spacing="12">
+
+            <Border Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
+                    BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                    BorderThickness="1" CornerRadius="4" Padding="16,12">
+                <Grid ColumnSpacing="12">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" Text="Outlook Classic:" FontWeight="SemiBold" VerticalAlignment="Center"/>
+                    <TextBlock Grid.Column="1" x:Name="OutlookStatusText" VerticalAlignment="Center"/>
+                </Grid>
+            </Border>
+
+            <Border Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
+                    BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                    BorderThickness="1" CornerRadius="4" Padding="16,12">
+                <Grid ColumnSpacing="12">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" Text="Log folder:" FontWeight="SemiBold" VerticalAlignment="Center"/>
+                    <HyperlinkButton Grid.Column="1" x:Name="LogFolderLink"
+                                     Click="LogFolderLink_Click"
+                                     Padding="0" VerticalAlignment="Center"/>
+                </Grid>
+            </Border>
+
+            <Border Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
+                    BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                    BorderThickness="1" CornerRadius="4" Padding="16,12">
+                <Grid ColumnSpacing="12">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" Text="Temp file retention:" FontWeight="SemiBold" VerticalAlignment="Center"/>
+                    <TextBlock Grid.Column="1" x:Name="RetentionText" VerticalAlignment="Center"/>
+                </Grid>
+            </Border>
+
+        </StackPanel>
+
+        <!-- Spacer -->
+        <Grid Grid.Row="2"/>
+
+        <!-- Footer version -->
+        <TextBlock Grid.Row="3"
+                   x:Name="VersionText"
+                   Style="{ThemeResource CaptionTextBlockStyle}"
+                   Opacity="0.5"
+                   HorizontalAlignment="Right"/>
+    </Grid>
+</Window>

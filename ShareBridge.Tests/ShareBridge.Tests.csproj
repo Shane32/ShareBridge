@@ -1,0 +1,38 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <IsPackable>false</IsPackable>
+    <RootNamespace>ShareBridge.Tests</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.13.0" />
+    <PackageReference Include="xunit" Version="2.9.3" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.8.2">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="coverlet.collector" Version="6.0.4">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <!--
+    The ShareBridge.App project targets net10.0-windows10.0.22621.0 and uses WinUI 3 APIs
+    that are not available on Linux CI. Rather than referencing it directly we copy only
+    the pure-logic source files that have no Windows-SDK dependencies.
+  -->
+  <ItemGroup>
+    <Compile Include="..\ShareBridge.App\Services\LoggingService.cs" Link="Services\LoggingService.cs"/>
+    <Compile Include="..\ShareBridge.App\Services\TempFileService.cs" Link="Services\TempFileService.cs"/>
+    <Compile Include="..\ShareBridge.App\Services\CleanupService.cs" Link="Services\CleanupService.cs"/>
+    <Compile Include="..\ShareBridge.App\Models\SharedPayload.cs" Link="Models\SharedPayload.cs"/>
+    <Compile Include="..\ShareBridge.App\Models\SharedFile.cs" Link="Models\SharedFile.cs"/>
+    <Compile Include="..\ShareBridge.App\Models\ShareBridgeSettings.cs" Link="Models\ShareBridgeSettings.cs"/>
+  </ItemGroup>
+
+</Project>
