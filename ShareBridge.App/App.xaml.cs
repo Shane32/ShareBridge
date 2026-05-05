@@ -30,12 +30,9 @@ public partial class App : Application
     {
         var activationArgs = AppInstance.GetCurrent().GetActivatedEventArgs();
 
-        if (activationArgs.Kind == ExtendedActivationKind.ShareTarget)
-        {
+        if (activationArgs.Kind == ExtendedActivationKind.ShareTarget) {
             HandleShareTargetActivation(activationArgs);
-        }
-        else
-        {
+        } else {
             ShowMainWindow();
         }
     }
@@ -46,8 +43,7 @@ public partial class App : Application
     private void HandleShareTargetActivation(AppActivationArguments activationArgs)
     {
         var shareArgs = activationArgs.Data as IShareTargetActivatedEventArgs;
-        if (shareArgs == null)
-        {
+        if (shareArgs == null) {
             _logger.LogError("init", "Share activation args could not be cast to IShareTargetActivatedEventArgs");
             ShowMainWindow();
             return;
@@ -61,24 +57,18 @@ public partial class App : Application
         var shareOp = shareArgs.ShareOperation;
         var svc = BuildShareActivationService();
 
-        svc.ErrorOccurred += (_, e) =>
-        {
-            _window.DispatcherQueue.TryEnqueue(() =>
-            {
+        svc.ErrorOccurred += (_, e) => {
+            _window.DispatcherQueue.TryEnqueue(() => {
                 var errorWindow = new ErrorWindow(e.Exception.Message, _logger.LogFolder);
                 errorWindow.Activate();
             });
         };
 
         // Fire and forget on the thread-pool; the background window keeps the app alive
-        _ = Task.Run(async () =>
-        {
-            try
-            {
+        _ = Task.Run(async () => {
+            try {
                 await svc.ProcessShareAsync(shareOp);
-            }
-            finally
-            {
+            } finally {
                 // Close the background window to allow the app to exit
                 _window.DispatcherQueue.TryEnqueue(() => _window.Close());
             }
@@ -115,17 +105,13 @@ public partial class App : Application
     private static ShareBridgeSettings LoadSettings()
     {
         var path = SettingsFilePath();
-        if (File.Exists(path))
-        {
-            try
-            {
+        if (File.Exists(path)) {
+            try {
                 var json = File.ReadAllText(path);
                 var loaded = JsonSerializer.Deserialize<ShareBridgeSettings>(json);
                 if (loaded != null)
                     return loaded;
-            }
-            catch
-            {
+            } catch {
                 // Fall through to defaults
             }
         }
@@ -138,13 +124,10 @@ public partial class App : Application
     private static void SaveSettings(ShareBridgeSettings settings, string? path = null)
     {
         path ??= SettingsFilePath();
-        try
-        {
+        try {
             Directory.CreateDirectory(Path.GetDirectoryName(path)!);
             File.WriteAllText(path, JsonSerializer.Serialize(settings, new JsonSerializerOptions { WriteIndented = true }));
-        }
-        catch
-        {
+        } catch {
             // Ignore save failures
         }
     }

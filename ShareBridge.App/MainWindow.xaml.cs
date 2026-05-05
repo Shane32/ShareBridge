@@ -43,16 +43,12 @@ public sealed partial class MainWindow : Window
 
     private void LogFolderLink_Click(object sender, RoutedEventArgs e)
     {
-        try
-        {
-            Process.Start(new ProcessStartInfo
-            {
+        try {
+            Process.Start(new ProcessStartInfo {
                 FileName = _logger.LogFolder,
                 UseShellExecute = true
             });
-        }
-        catch
-        {
+        } catch {
             // Best effort
         }
     }

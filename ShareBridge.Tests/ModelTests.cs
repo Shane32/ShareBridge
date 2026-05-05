@@ -1,5 +1,5 @@
-using ShareBridge.App.Models;
 using System.Text.Json;
+using ShareBridge.App.Models;
 using Xunit;
 
 namespace ShareBridge.Tests;
@@ -26,8 +26,7 @@ public sealed class ModelTests
     [Fact]
     public void ShareBridgeSettings_RoundTripsJson()
     {
-        var original = new ShareBridgeSettings
-        {
+        var original = new ShareBridgeSettings {
             Destination = "outlook-classic",
             TempFileRetentionHours = 48,
             DefaultSubject = "Shared image",
@@ -61,8 +60,7 @@ public sealed class ModelTests
             new SharedFile { FileName = "snip.png", FullPath = "/tmp/snip.png", ContentType = "image/png" }
         };
 
-        var payload = new SharedPayload
-        {
+        var payload = new SharedPayload {
             OperationId = "abc123",
             ReceivedAt = receivedAt,
             Files = files.AsReadOnly(),
@@ -82,8 +80,7 @@ public sealed class ModelTests
     [Fact]
     public void SharedFile_Properties_AreInitialized()
     {
-        var file = new SharedFile
-        {
+        var file = new SharedFile {
             FileName = "snip.png",
             FullPath = @"C:\Users\test\AppData\Local\ShareBridge\Incoming\op\snip.png",
             ContentType = "image/png",

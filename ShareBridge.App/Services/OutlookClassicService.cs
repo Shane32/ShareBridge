@@ -37,20 +37,14 @@ public sealed class OutlookClassicService
         // COM automation must run on an STA thread
         var tcs = new TaskCompletionSource<bool>(TaskCreationOptions.RunContinuationsAsynchronously);
 
-        var thread = new System.Threading.Thread(() =>
-        {
-            try
-            {
+        var thread = new System.Threading.Thread(() => {
+            try {
                 cancellationToken.ThrowIfCancellationRequested();
                 CreateEmailInternal(payload);
                 tcs.SetResult(true);
-            }
-            catch (OperationCanceledException ex)
-            {
+            } catch (OperationCanceledException ex) {
                 tcs.SetCanceled(ex.CancellationToken);
-            }
-            catch (Exception ex)
-            {
+            } catch (Exception ex) {
                 tcs.SetException(ex);
             }
         });
@@ -83,10 +77,8 @@ public sealed class OutlookClassicService
         if (!string.IsNullOrEmpty(_settings.DefaultBody))
             mail.Body = _settings.DefaultBody;
 
-        if (_settings.AttachFiles)
-        {
-            foreach (var file in payload.Files)
-            {
+        if (_settings.AttachFiles) {
+            foreach (var file in payload.Files) {
                 _logger.LogInfo(payload.OperationId, $"Attaching '{file.FullPath}'");
                 mail.Attachments.Add(
                     file.FullPath,

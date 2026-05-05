@@ -56,8 +56,7 @@ public sealed class TempFileService
 
         _logger.LogInfo(operationId, $"Copied file '{originalName}' -> '{destPath}'");
 
-        return new SharedFile
-        {
+        return new SharedFile {
             FileName = Path.GetFileName(destPath),
             FullPath = destPath,
             ContentType = contentType,
@@ -93,8 +92,7 @@ public sealed class TempFileService
 
         _logger.LogInfo(operationId, $"Saved stream -> '{destPath}' ({info.Length} bytes)");
 
-        return new SharedFile
-        {
+        return new SharedFile {
             FileName = Path.GetFileName(destPath),
             FullPath = destPath,
             ContentType = contentType,
@@ -110,13 +108,11 @@ public sealed class TempFileService
         SharedPayload payload,
         CancellationToken cancellationToken)
     {
-        var metadata = new
-        {
+        var metadata = new {
             receivedAt = payload.ReceivedAt.ToString("O"),
             source = "Windows Share",
             formats = payload.SourceFormats,
-            files = payload.Files.Select(f => new
-            {
+            files = payload.Files.Select(f => new {
                 fileName = f.FileName,
                 contentType = f.ContentType
             }).ToArray()
@@ -143,19 +139,15 @@ public sealed class TempFileService
         CancellationToken cancellationToken)
     {
         const int maxAttempts = 3;
-        for (var attempt = 1; attempt <= maxAttempts; attempt++)
-        {
-            try
-            {
+        for (var attempt = 1; attempt <= maxAttempts; attempt++) {
+            try {
                 await using var src = new FileStream(
                     source, FileMode.Open, FileAccess.Read, FileShare.ReadWrite, 81920, true);
                 await using var dst = new FileStream(
                     dest, FileMode.CreateNew, FileAccess.Write, FileShare.None, 81920, true);
                 await src.CopyToAsync(dst, cancellationToken);
                 return;
-            }
-            catch (IOException) when (attempt < maxAttempts)
-            {
+            } catch (IOException) when (attempt < maxAttempts) {
                 await Task.Delay(200 * attempt, cancellationToken);
             }
         }
@@ -169,8 +161,7 @@ public sealed class TempFileService
 
         var nameWithoutExt = Path.GetFileNameWithoutExtension(fileName);
         var ext = Path.GetExtension(fileName);
-        for (var i = 1; i < 1000; i++)
-        {
+        for (var i = 1; i < 1000; i++) {
             candidate = Path.Combine(folder, $"{nameWithoutExt}_{i}{ext}");
             if (!File.Exists(candidate))
                 return candidate;
@@ -198,8 +189,7 @@ public sealed class TempFileService
         };
 
         var chars = name.ToCharArray();
-        for (var i = 0; i < chars.Length; i++)
-        {
+        for (var i = 0; i < chars.Length; i++) {
             if (windowsInvalid.Contains(chars[i]))
                 chars[i] = '_';
         }
@@ -209,8 +199,7 @@ public sealed class TempFileService
     }
 
     private static string? GetContentTypeForExtension(string ext) =>
-        ext.ToLowerInvariant() switch
-        {
+        ext.ToLowerInvariant() switch {
             ".png" => "image/png",
             ".jpg" or ".jpeg" => "image/jpeg",
             ".bmp" => "image/bmp",

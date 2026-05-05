@@ -49,8 +49,7 @@ public sealed class ShareActivationService
         SharedPayload? payload = null;
         string? operationFolder = null;
 
-        try
-        {
+        try {
             // Report to Windows that we have received the share
             shareOperation.ReportStarted();
 
@@ -73,22 +72,16 @@ public sealed class ShareActivationService
 
             // Signal completion to Windows
             shareOperation.ReportCompleted();
-        }
-        catch (Exception ex)
-        {
+        } catch (Exception ex) {
             _logger.LogError(operationId, "Share operation failed", ex);
 
-            try { shareOperation.ReportError(ex.Message); }
-            catch { /* best effort */ }
+            try { shareOperation.ReportError(ex.Message); } catch { /* best effort */ }
 
             if (_settings.ShowErrors)
                 ErrorOccurred?.Invoke(this, new ShareErrorEventArgs(operationId, ex));
-        }
-        finally
-        {
+        } finally {
             // Opportunistic cleanup (never remove the active folder)
-            try { _cleanup.RunCleanup(operationFolder); }
-            catch (Exception ex) { _logger.LogWarning(operationId, "Cleanup failed", ex); }
+            try { _cleanup.RunCleanup(operationFolder); } catch (Exception ex) { _logger.LogWarning(operationId, "Cleanup failed", ex); }
         }
     }
 }

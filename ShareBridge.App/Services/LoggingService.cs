@@ -8,24 +8,23 @@ namespace ShareBridge.App.Services;
 /// </summary>
 public sealed class LoggingService
 {
-    private readonly string _logFolder;
     private readonly object _lock = new();
 
     public LoggingService()
     {
-        _logFolder = Path.Combine(
+        LogFolder = Path.Combine(
             Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
             "ShareBridge",
             "Logs");
-        Directory.CreateDirectory(_logFolder);
+        Directory.CreateDirectory(LogFolder);
     }
 
     /// <summary>Gets the folder where log files are written.</summary>
-    public string LogFolder => _logFolder;
+    public string LogFolder { get; }
 
     /// <summary>Gets the path of today's log file.</summary>
     public string TodayLogFile =>
-        Path.Combine(_logFolder, $"sharebridge-{DateTimeOffset.Now:yyyy-MM-dd}.log");
+        Path.Combine(LogFolder, $"sharebridge-{DateTimeOffset.Now:yyyy-MM-dd}.log");
 
     /// <summary>Writes an informational log entry.</summary>
     public void LogInfo(string operationId, string message) =>
@@ -50,21 +49,18 @@ public sealed class LoggingService
         sb.Append(' ');
         sb.Append(message);
 
-        if (ex != null)
-        {
+        if (ex != null) {
             sb.AppendLine();
             sb.Append("  Exception: ");
             sb.Append(ex.GetType().FullName);
             sb.Append(": ");
             sb.Append(ex.Message);
-            if (ex.StackTrace != null)
-            {
+            if (ex.StackTrace != null) {
                 sb.AppendLine();
                 foreach (var line in ex.StackTrace.Split('\n'))
                     sb.Append("    ").AppendLine(line.TrimEnd());
             }
-            if (ex.InnerException != null)
-            {
+            if (ex.InnerException != null) {
                 sb.Append("  Inner: ");
                 sb.Append(ex.InnerException.GetType().FullName);
                 sb.Append(": ");
@@ -74,14 +70,10 @@ public sealed class LoggingService
 
         var logLine = sb.ToString();
 
-        lock (_lock)
-        {
-            try
-            {
+        lock (_lock) {
+            try {
                 File.AppendAllText(TodayLogFile, logLine + Environment.NewLine);
-            }
-            catch
-            {
+            } catch {
                 // Logging must never throw
             }
         }
