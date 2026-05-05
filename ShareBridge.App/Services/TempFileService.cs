@@ -37,7 +37,7 @@ public sealed class TempFileService
 
     /// <summary>
     /// Copies a source file into the operation folder, preserving its extension
-    /// and sanitising the file name.
+    /// and sanitizing the file name.
     /// </summary>
     public async Task<SharedFile> CopyFileAsync(
         string sourceFilePath,
