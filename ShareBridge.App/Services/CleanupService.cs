@@ -23,7 +23,7 @@ public class CleanupService
     /// <summary>
     /// Internal constructor used by tests to inject a custom incoming folder path.
     /// </summary>
-    internal CleanupService(LoggingService logger, int retentionHours, string incomingRoot)
+    public CleanupService(LoggingService logger, int retentionHours, string incomingRoot)
     {
         _logger = logger;
         _retentionHours = retentionHours;

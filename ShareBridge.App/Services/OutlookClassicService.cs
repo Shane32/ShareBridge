@@ -8,7 +8,7 @@ namespace ShareBridge.App.Services;
 /// </summary>
 public sealed class OutlookClassicService
 {
-    private const int OlMailItem = 0;
+    private const int OL_MAIL_ITEM = 0;
 
     private readonly LoggingService _logger;
     private readonly ShareBridgeSettings _settings;
@@ -69,7 +69,7 @@ public sealed class OutlookClassicService
 
         _logger.LogInfo(payload.OperationId, "Creating MailItem");
 
-        dynamic mail = outlook.CreateItem(OlMailItem);
+        dynamic mail = outlook.CreateItem(OL_MAIL_ITEM);
 
         if (!string.IsNullOrEmpty(_settings.DefaultSubject))
             mail.Subject = _settings.DefaultSubject;

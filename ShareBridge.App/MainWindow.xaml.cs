@@ -22,7 +22,7 @@ public sealed partial class MainWindow : Window
         this.InitializeComponent();
 
         Title = "Share Bridge";
-        this.AppWindow.Resize(new Windows.Graphics.SizeInt32(520, 400));
+        AppWindow.Resize(new Windows.Graphics.SizeInt32(520, 400));
 
         PopulateStatus();
     }
@@ -41,7 +41,7 @@ public sealed partial class MainWindow : Window
         VersionText.Text = version != null ? $"v{version.Major}.{version.Minor}.{version.Build}" : string.Empty;
     }
 
-    private void LogFolderLink_Click(object sender, RoutedEventArgs e)
+    private void LogFolderLink_Click(object _sender, RoutedEventArgs _e)
     {
         try {
             Process.Start(new ProcessStartInfo {

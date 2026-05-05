@@ -1,11 +1,13 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net10.0</TargetFramework>
+    <TargetFramework>net10.0-windows10.0.22621.0</TargetFramework>
+    <TargetPlatformMinVersion>10.0.17763.0</TargetPlatformMinVersion>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <IsPackable>false</IsPackable>
     <RootNamespace>ShareBridge.Tests</RootNamespace>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
 
   <ItemGroup>
@@ -21,18 +23,8 @@
     </PackageReference>
   </ItemGroup>
 
-  <!--
-    The ShareBridge.App project targets net10.0-windows10.0.22621.0 and uses WinUI 3 APIs
-    that are not available on Linux CI. Rather than referencing it directly we copy only
-    the pure-logic source files that have no Windows-SDK dependencies.
-  -->
   <ItemGroup>
-    <Compile Include="..\ShareBridge.App\Services\LoggingService.cs" Link="Services\LoggingService.cs"/>
-    <Compile Include="..\ShareBridge.App\Services\TempFileService.cs" Link="Services\TempFileService.cs"/>
-    <Compile Include="..\ShareBridge.App\Services\CleanupService.cs" Link="Services\CleanupService.cs"/>
-    <Compile Include="..\ShareBridge.App\Models\SharedPayload.cs" Link="Models\SharedPayload.cs"/>
-    <Compile Include="..\ShareBridge.App\Models\SharedFile.cs" Link="Models\SharedFile.cs"/>
-    <Compile Include="..\ShareBridge.App\Models\ShareBridgeSettings.cs" Link="Models\ShareBridgeSettings.cs"/>
+    <ProjectReference Include="..\ShareBridge.App\ShareBridge.App.csproj" />
   </ItemGroup>
 
 </Project>

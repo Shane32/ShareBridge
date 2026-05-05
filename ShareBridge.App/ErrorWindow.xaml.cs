@@ -18,12 +18,12 @@ public sealed partial class ErrorWindow : Window
         this.InitializeComponent();
 
         Title = "Share Bridge – Error";
-        this.AppWindow.Resize(new Windows.Graphics.SizeInt32(480, 280));
+        AppWindow.Resize(new Windows.Graphics.SizeInt32(480, 280));
 
         ErrorMessageText.Text = errorMessage;
     }
 
-    private void OpenLogFolderButton_Click(object sender, RoutedEventArgs e)
+    private void OpenLogFolderButton_Click(object _sender, RoutedEventArgs _e)
     {
         try {
             Process.Start(new ProcessStartInfo {
@@ -35,6 +35,6 @@ public sealed partial class ErrorWindow : Window
         }
     }
 
-    private void CloseButton_Click(object sender, RoutedEventArgs e) =>
-        this.Close();
+    private void CloseButton_Click(object _sender, RoutedEventArgs _e) =>
+        Close();
 }
