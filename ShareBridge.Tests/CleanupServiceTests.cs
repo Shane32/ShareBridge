@@ -29,7 +29,7 @@ public sealed class CleanupServiceTests : IDisposable
 
         var oldFolder = Path.Combine(_testIncomingRoot, "2026-01-01T00-00-00-000");
         Directory.CreateDirectory(oldFolder);
-        File.SetCreationTimeUtc(oldFolder, DateTime.UtcNow.AddHours(-2));
+        Directory.SetCreationTimeUtc(oldFolder, DateTime.UtcNow.AddHours(-2));
 
         svc.RunCleanup();
 
@@ -57,7 +57,7 @@ public sealed class CleanupServiceTests : IDisposable
 
         var activeFolder = Path.Combine(_testIncomingRoot, "active");
         Directory.CreateDirectory(activeFolder);
-        File.SetCreationTimeUtc(activeFolder, DateTime.UtcNow.AddHours(-2));
+        Directory.SetCreationTimeUtc(activeFolder, DateTime.UtcNow.AddHours(-2));
 
         svc.RunCleanup(activeOperationFolder: activeFolder);
 
