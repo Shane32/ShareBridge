@@ -1,0 +1,7 @@
+<Window
+    x:Class="ShareBridge.App.BackgroundWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Title="Share Bridge">
+    <Grid/>
+</Window>
