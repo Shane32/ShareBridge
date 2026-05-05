@@ -41,7 +41,7 @@ public sealed partial class MainWindow : Window
         VersionText.Text = version != null ? $"v{version.Major}.{version.Minor}.{version.Build}" : string.Empty;
     }
 
-    private void LogFolderLink_Click(object _sender, RoutedEventArgs _e)
+    private void LogFolderLink_Click(object _, RoutedEventArgs _)
     {
         try {
             Process.Start(new ProcessStartInfo {

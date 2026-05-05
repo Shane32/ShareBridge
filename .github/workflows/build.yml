@@ -32,3 +32,4 @@ jobs:
           --configuration Release
           --no-restore
           -p:Platform=x64
+          -p:GenerateAppxPackageOnBuild=false

@@ -23,7 +23,7 @@ public sealed partial class ErrorWindow : Window
         ErrorMessageText.Text = errorMessage;
     }
 
-    private void OpenLogFolderButton_Click(object _sender, RoutedEventArgs _e)
+    private void OpenLogFolderButton_Click(object _, RoutedEventArgs _)
     {
         try {
             Process.Start(new ProcessStartInfo {
@@ -35,6 +35,6 @@ public sealed partial class ErrorWindow : Window
         }
     }
 
-    private void CloseButton_Click(object _sender, RoutedEventArgs _e) =>
+    private void CloseButton_Click(object _, RoutedEventArgs _) =>
         Close();
 }
